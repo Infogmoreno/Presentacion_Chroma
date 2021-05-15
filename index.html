@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
     <head>
@@ -11,22 +10,21 @@
             AFRAME.registerComponent('videohandler', {
                 init: function () {
                     var marker = this.el;
-                    this.asset = document.querySelector("#asset");
+                    this.vid = document.querySelector("#vid");
 
                     marker.addEventListener('markerFound', function () {
                         this.toggle = true;
-                        this.asset.play();
+                        this.vid.play();
                     }.bind(this));
 
                     marker.addEventListener('markerLost', function () {
                         this.toggle = false;
-                        this.asset.pause();
+                        this.vid.pause();
                     }.bind(this));
                 },
             });
         </script>
     </head>
-
     <body style="margin: 0; overflow: hidden;">
         <a-scene
             vr-mode-ui="enabled: false"
@@ -38,7 +36,7 @@
         >
             <a-assets>
                 <video
-                    id="asset"
+                    id="vid"
                     src="assets/asset.mp4"
                     preload="auto"
                     response-type="arraybuffer"
@@ -48,9 +46,8 @@
                     autoplay
                     muted
                     playsinline
-            ></video>
+                ></video>
             </a-assets>
-
             <a-marker
                 type="pattern"
                 preset="custom"
@@ -65,17 +62,11 @@
                 cursor="fuse: false; rayOrigin: mouse;"
                 id="markerA"
             >
-                <a-video
-                    src="#asset"
-                    scale="1.1 2 2"
-                    position="0 0 0"
-                    rotation="0 0 0"
-                    class="clickable"
-                    gesture-handler
-                    material="shader: chromakey; color: 0.0 1.0 0.0"     
-                ></a-video>
+              <a-video
+                  material="shader: chromakey; src: #vid; color: 0.1 0.9 0.2"
+                  scale="1 1 1" position="0 0 0" rotation="-90 0 0" class="clickable" gesture-handler
+              ></a-video>
             </a-marker>
-
             <a-entity camera></a-entity>
         </a-scene>
     </body>
