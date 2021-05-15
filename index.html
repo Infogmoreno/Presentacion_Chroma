@@ -11,16 +11,16 @@
             AFRAME.registerComponent('videohandler', {
                 init: function () {
                     var marker = this.el;
-                    this.vid = document.querySelector("#asset");
+                    this.asset = document.querySelector("#asset");
 
                     marker.addEventListener('markerFound', function () {
                         this.toggle = true;
-                        this.vid.play();
+                        this.asset.play();
                     }.bind(this));
 
                     marker.addEventListener('markerLost', function () {
                         this.toggle = false;
-                        this.vid.pause();
+                        this.asset.pause();
                     }.bind(this));
                 },
             });
